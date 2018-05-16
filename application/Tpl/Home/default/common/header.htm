@@ -1,0 +1,14 @@
+<header>
+    <h1>花落微凉</h1>
+    <h2>影子是一个会撒谎的精灵，它在虚空中流浪和等待被发现之间;在存在与不存在之间....</h2>
+    <div class="logo"><a href="/"></a></div>
+    <nav id="topnav">
+		<a {if condition="($controller_name eq 'index')"}class="topnav_current"{/if} href="/">首页</a>
+		<a {if condition="($controller_name eq 'memory')"}class="topnav_current"{/if} href="{:url('index/memory/index')}">慢生活</a>
+		<a {if condition="($controller_name eq 'mood')"}class="topnav_current"{/if} href="{:url('index/mood/index')}">念念碎</a>
+		<a {if condition="($controller_name eq 'album')"}class="topnav_current"{/if} href="{:url('index/album/index')}">刹那间</a>
+		<a {if condition="($controller_name eq 'user')"}class="topnav_current"{/if} href="{:url('index/user/about')}">关于我</a>
+	</nav>
+  </header>
+  
+ 

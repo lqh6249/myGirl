@@ -1,0 +1,6 @@
+{if condition="(!empty($mood_list))"}
+	{volist name="mood_list" id="val"} 
+		<ul class="say_box"><div class="sy"> <p>{$val['content']|strip_tags}</p></div><span class="dateview">{$val['create_time']|date="Y-m-d",###}</span></ul>
+	{/volist}
+{/if}
+

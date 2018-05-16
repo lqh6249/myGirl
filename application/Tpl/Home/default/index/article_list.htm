@@ -1,0 +1,40 @@
+{include file="common/meta" /}
+<link rel="stylesheet" href="HOME_CSS/memory.css" />
+</head>
+<body>
+<div class="ibody">
+  {include file="common/header" /}
+  <article>
+    <h2 class="about_h">您现在的位置是：<a href="/">首页</a>><a href="{:url('index/memory/index')}">慢生活</a></h2>
+    <div class="bloglist">
+		{volist name="list" id="val"} 
+			<div class="newblog">
+				<ul>
+				    <h3><a href="{:url('index/memory/detail',array('id'=>$val['id']))}">{$val['title']}</a></h3>
+				    <div class="autor">
+						<span>作者：{$val['author_name']}</span>
+						<span>分类：[<a href="{:url('index/memory/index',array('type'=>$val['article_type']['id']))}">{$val['article_type']['title']}</a>]</span>
+						<span>浏览（{$val['views']}）</span>
+						<span>评论（{$val['comments']}）</span>
+					</div>
+				    <p>{$val['content']|strip_tags|mb_substr=0,110,'utf-8'}...... <a href="{:url('index/memory/detail',array('id'=>$val['id']))}" target="_blank" class="readmore">全文</a></p>
+				</ul>
+				<figure><img src="{$val['thum']}" ></figure>
+				<div class="dateview">{$val['create_time']|date="Y-m-d",###}</div>
+			</div>
+		{/volist}
+    </div>
+    <div class="page">
+		{$page}
+	</div>
+  </article>
+  <aside>
+    {include file="common/cat_nav" /}
+    {include file="common/record" /}
+  </aside>
+  <div class="clear"></div>
+  <!-- 清除浮动 --> 
+</div>
+{include file="common/script" /}
+</body>
+</html>

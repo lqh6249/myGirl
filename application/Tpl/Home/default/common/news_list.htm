@@ -1,0 +1,5 @@
+<ul>
+{volist name="news_list" id="val"}
+	<li><a href="{:url('index/memory/detail',array('id'=>$val['id']))}">{$val['title']|mb_substr=0,24,'utf-8'}</a></li>  
+{/volist}
+</ul>

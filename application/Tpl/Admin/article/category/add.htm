@@ -1,0 +1,61 @@
+<form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label for="c-pid" class="control-label col-xs-12 col-sm-2">所属类别:</label>
+        <div class="col-xs-12 col-sm-8">
+
+            <select id="c-pid" data-rule="required" class="form-control selectpicker" name="row[type]">
+                {foreach name="parentList" item="vo"}
+                <option value="{$key}" {in name="key" value=""}selected{/in}>{$vo.title}</option>
+                {/foreach}
+            </select>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-name" class="control-label col-xs-12 col-sm-2">{:__('Name')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-name" data-rule="required" class="form-control" name="row[title]" type="text" value="">
+        </div>
+    </div>
+	<div class="form-group">
+		<label for="c-keywords" class="control-label col-xs-12 col-sm-2">关键字:</label>
+		<div class="col-xs-12 col-sm-8">
+			<input id="c-keywords" class="form-control" name="row[keywords]" type="text">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="c-image" class="control-label col-xs-12 col-sm-2">封面:</label>
+		<div class="col-xs-12 col-sm-8">
+			<div class="form-inline">
+				<input id="c-image" class="form-control" size="50" name="row[thum]" type="text" value="/assets/admin/img/qrcode.png">
+				<span><button type="button" id="plupload-image" class="btn btn-danger plupload" data-multiple="false" data-input-id="c-image" data-preview-id="p-image"><i class="fa fa-upload"></i> 上传</button></span>
+				<ul class="row list-inline plupload-preview" id="p-image"></ul>
+			</div>
+		</div>
+	</div>
+    <div class="form-group">
+		<label for="c-content" class="control-label col-xs-12 col-sm-2">内容:</label>
+		<div class="col-xs-12 col-sm-8">
+			<textarea id="c-content" class="form-control summernote" name="row[content]" cols="50" rows="10"></textarea>
+		</div>
+	</div>
+    <div class="form-group">
+        <label for="c-status" class="control-label col-xs-12 col-sm-2">{:__('Status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[status]', ['normal'=>__('Normal'), 'hidden'=>__('Hidden')])}
+        </div>
+    </div>
+	<div class="form-group">
+        <label for="c-status" class="control-label col-xs-12 col-sm-2">标记:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[is_recmoend]', ['1'=>'推荐','0'=>'不推荐'], 0)}
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

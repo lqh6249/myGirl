@@ -1,0 +1,5 @@
+<ul class="ph_n">
+{volist name="click_list" key="key" id="val"} 
+	<li><span {lt name="key" value="4"}class="num{$key}"{/lt}>{$key}</span><a href="{:url('index/memory/detail',array('id'=>$val['id']))}">{$val['title']|mb_substr=0,25,'utf-8'}</a></li>
+{/volist}
+</ul>

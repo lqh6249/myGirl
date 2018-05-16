@@ -1,0 +1,41 @@
+{include file="common/meta" /}
+
+<link rel="stylesheet" href="HOME_CSS/mood.css" />
+</head>
+<body>
+<div class="ibody">
+	{include file="common/header" /}
+	<article>
+		<h2 class="about_h">您现在的位置是：<a href="/">首页</a>><a href="{:url('index/mood/index')}">碎言碎语</a></h2>
+	</article>
+	<div class="clear"></div>
+	<!-- 清除浮动 --> 
+</div>
+<div class="say">
+	{volist name="mood_list" id="val"} 
+		<ul class="say_box"><div class="sy"> <p>{$val['content']|strip_tags}</p></div><span class="dateview">{$val['create_time']|date="Y-m-d",###}</span></ul>
+	{/volist}
+</div>
+{include file="common/script" /}
+<script type="text/javascript">
+	var page = 1;
+	$(function(){
+		$(window).scroll(function(){
+			if ($(window).scrollTop() == $(document).height() - $(window).height()){
+				page++;
+				loadPage();
+			}
+		});
+		
+		function loadPage(){
+			$.post("{:url('index/mood/moodPageList')}",{page:page},function(data){
+				if(data){
+					$(".say").append(data);
+					return false;
+				}
+			});
+		}
+	})
+</script>
+</body>
+</html>

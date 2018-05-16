@@ -1,0 +1,73 @@
+{include file="common/meta" /}
+<link rel="stylesheet" href="HOME_CSS/album.css" />
+</head>
+<body>
+<div class="ibody">
+	{include file="common/header" /}
+	<article>
+		<h2 class="about_h">您现在的位置是：<a href="/">首页</a>><a href="{:url('index/album/index')}">相册</a></h2>
+	</article>
+	<div class="clear"></div>
+	<!-- 清除浮动 --> 
+</div>
+<div class="xc_content">
+	<div class="con-bg">
+		<div class="w960 mt_10">
+			<div class="w650">
+				<ul class="tips" id="wf-main" style="display:none">
+					{volist name="album_list"  key="key" id="val"}
+					<li class="wf-cld">
+						<img src="{$val}" {:get_image($_SERVER['DOCUMENT_ROOT'].$val)} />
+					</li> 
+					{/volist}
+					{volist name="album_list"  key="key" id="val"}
+					<li class="wf-cld">
+						<img rel="lazy" lazy_src="{$val}" {:get_image($_SERVER['DOCUMENT_ROOT'].$val)} />
+					</li>
+					{/volist}					
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{include file="common/script" /}
+<script type="text/javascript" src="HOME_JS/waterfall.js"></script>
+<script type="text/javascript">
+	var timer, m = 0, m1 = $("img[rel='lazy']").length;
+	$(function(){
+		$("#wf-main img[rel='lazy']").each(function(i){
+			var _left = $(this).parent().parent().css("left").replace("px", "");
+			$(this).parent().parent().attr("_left", _left);
+			$(this).parent().parent().css("left", 0);
+		});
+		fade();
+	});
+
+	function fade() {
+		 $("img[rel='lazy']").each(function(){
+		 	var $scroTop = $(this).offset();
+		 	var $hight = $(window).scrollTop() + $(window).height();
+		 	if ($scroTop.top <= $hight){
+		 		$(this).hide();
+                $(this).attr("src", $(this).attr("lazy_src"));
+                $(this).attr("top", $scroTop.top);
+                $(this).removeAttr("rel");
+                $(this).removeAttr("lazy_src");
+                $(this).fadeIn(600);
+                var _left = $(this).parent().parent().attr("_left");
+                if (_left != undefined) 
+                	$(this).parent().parent().animate({ left: _left }, 400);
+                m++;
+		 	}
+		 });
+
+		if (m < m1) { 
+			timer = window.setTimeout(fade, 300); 
+		}else { 
+			window.clearTimeout(timer); 
+		}
+	}
+	$("#wf-main").show();
+</script>
+</body>
+</html>
